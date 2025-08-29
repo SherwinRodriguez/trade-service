@@ -1,5 +1,7 @@
 package com.rtsrms.trade_service.model;
 
+import com.rtsrms.trade_service.enums.AssetType;
+import com.rtsrms.trade_service.enums.TradeStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,8 +26,9 @@ public class Trade {
     @Column(nullable = false)
     private int userId;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String assetType;
+    private AssetType assetType;
 
     @Column(nullable = false)
     private String assetName;
@@ -33,8 +36,9 @@ public class Trade {
     @Column(nullable = false)
     private double amount;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;
+    private TradeStatus status;
 
     @CreatedDate
     @Column(nullable = false)
