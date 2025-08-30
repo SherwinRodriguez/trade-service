@@ -5,7 +5,6 @@ import com.rtsrms.trade_service.enums.TradeStatus;
 import com.rtsrms.trade_service.model.Trade;
 import com.rtsrms.trade_service.service.TradeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Optional;
 @RequestMapping("/api/trades")
 @RequiredArgsConstructor
 public class TradeController {
-    @Autowired
     private final TradeService tradeService;
 
     @PostMapping
@@ -48,13 +46,23 @@ public class TradeController {
             return tradeService.findByAssetType(assetType);
         }
 
-    @GetMapping("/{id}/status")
+    @GetMapping("/user/{userid}/status")
     public List<Trade> findByUserIdAndStatus(@PathVariable @RequestParam int userId, TradeStatus status){
         return tradeService.findByUserIdAndStatus(userId,status);
     }
 
-    @GetMapping("/{id}/recent")
+    @GetMapping("/user/{userid}/latest")
     public Optional<Trade> findTopByUserIdOrderByCreatedAtDesc(@PathVariable int id){
         return tradeService.findTopByUserIdOrderByCreatedAtDesc(id);
+    }
+
+    @PatchMapping("/{id}")
+    public Trade updateTrade(@PathVariable Long id, @RequestBody Trade trade){
+        return tradeService.updateStaus(id,trade);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTrade(@PathVariable Long id){
+        tradeService.deleteTrade(id);
     }
 }

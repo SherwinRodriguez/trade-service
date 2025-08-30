@@ -50,4 +50,18 @@ public class TradeService {
     public List<Trade> findByUserIdAndStatus(int userId, TradeStatus status) {
         return tradeRepository.findByUserIdAndStatus(userId,status);
     }
+
+    public Trade updateStaus(Long id, Trade tradeDetails) {
+        Trade trade = tradeRepository.findById(id).orElseThrow(()-> new RuntimeException("Trade not found with id"+id));
+        if(tradeDetails.getAssetType()!=null){ trade.setAssetType(tradeDetails.getAssetType());}
+        if(tradeDetails.getStatus()!=null){ trade.setStatus(tradeDetails.getStatus());}
+        if(trade.getAssetName()!=null){ trade.setAssetName(trade.getAssetName());}
+        if(trade.getAmount()!=0){ trade.setAmount(trade.getAmount());}
+        return tradeRepository.save(trade);
+    }
+
+    public void deleteTrade(Long id) {
+    Trade trade = tradeRepository.findById(id).orElseThrow(()-> new RuntimeException("Trade not found with id"+id));
+        tradeRepository.delete(trade);
+    }
 }

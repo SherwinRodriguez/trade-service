@@ -1,8 +1,8 @@
 package com.rtsrms.trade_service.enums;
 
-public class TradeStatus {
-    PENDING,
-    COMPLETED,
-    FAILED,
-    CANCELLED
+public enum TradeStatus {
+    Pending,
+    Completed,
+    Failed,
+    Cancelled
 }

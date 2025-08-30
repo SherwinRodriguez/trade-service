@@ -1,8 +1,8 @@
 package com.rtsrms.trade_service.enums;
 
-public class AssetType {
-    STOCK,
-    BOND,
-    CRYPTO,
-    FOREX
+public enum AssetType {
+    Stock,
+    Bond,
+    Crypto,
+    Forex
 }
